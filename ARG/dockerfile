@@ -1,0 +1,18 @@
+ARG version
+FROM almalinux:${version:-9}
+ARG course="docker" \
+    trainer="sivakumar" \
+    duration="10hrs"
+ENV course=${course} \
+    duration=${duration} \
+    trainer=${trainer}
+RUN echo "Course is: ${course}, Duration is: ${duration}, Trainer is: ${trainer}, Version is: ${version}"
+
+
+#This declares a build argument named version before the FROM line. In Docker, any ARG declared before FROM exists in a special scope — it's only usable inside the FROM instruction itself (to pick the base image), and nowhere else. It's not available in later RUN, ENV, or CMD instructions unless you re-declare it after FROM.
+
+#You'd set it at build time like: docker build --build-arg version=8 -t myimage .
+
+#If you don't pass --build-arg version=..., it's empty/unset — which is why the next line has a fallback.
+
+#FROM almalinux:${version:-9}

@@ -1,0 +1,13 @@
+FROM almalinux:9
+
+RUN dnf install -y nginx
+
+# ENTRYPOINT defines the FIXED, always-run part of the container's process.
+# It CANNOT be overridden just by passing extra args to `docker run` —
+# anything you type after the image name gets APPENDED as arguments to it.
+ENTRYPOINT ["nginx"]
+
+# CMD defines the DEFAULT arguments passed to ENTRYPOINT.
+# Unlike ENTRYPOINT, CMD is easily overridden — if you pass ANY command
+# after the image name in `docker run`, it replaces CMD entirely.
+CMD ["-g", "daemon off;"]
